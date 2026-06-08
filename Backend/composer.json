@@ -1,0 +1,14 @@
+{
+  "name": "native/erp",
+  "description": "Native PHP ERP backend",
+  "type": "project",
+  "require": {},
+    "autoload": {
+        "classmap": [
+            "core/",
+            "app/Handlers/",
+            "app/Models/",
+            "app/Services/"
+        ]
+    }
+}

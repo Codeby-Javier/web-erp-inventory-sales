@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ERP Inventory Sales</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <aside class="sidebar">
+      <div class="brand">
+        <span class="brand-mark">E</span>
+        <div>
+          <strong>ERP Inventory</strong>
+          <small>Sales & Stock</small>
+        </div>
+      </div>
+      <nav class="nav" aria-label="Menu utama">
+        <button class="active" data-view="dashboard">Dashboard</button>
+        <button data-view="products">Produk</button>
+        <button data-view="stock">Stok</button>
+        <button data-view="sales">Penjualan</button>
+        <button data-view="purchases">Pembelian</button>
+        <button data-view="master">Master</button>
+      </nav>
+    </aside>
+
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <h1 id="pageTitle">Dashboard</h1>
+          <p id="pageSubtitle">Ringkasan performa inventory dan penjualan.</p>
+        </div>
+        <div class="session">
+          <input id="apiBase" aria-label="Backend URL" placeholder="Backend URL">
+          <span id="userBadge">Belum login</span>
+          <button id="logoutBtn" class="ghost">Logout</button>
+        </div>
+      </header>
+
+      <section id="loginPanel" class="login-panel">
+        <form id="loginForm" class="login-form">
+          <h2>Masuk ERP</h2>
+          <p>Gunakan akun backend yang ada di database ERP.</p>
+          <label>Username <input name="username" autocomplete="username" required></label>
+          <label>Password <input name="password" type="password" autocomplete="current-password" required></label>
+          <button type="submit">Login</button>
+          <div id="loginMessage" class="message"></div>
+        </form>
+      </section>
+
+      <section id="appPanel" class="app-panel hidden">
+        <div id="content"></div>
+      </section>
+    </main>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
