@@ -1,0 +1,1 @@
+csrf_token|s:64:"10d0f2c37051980223c80a69d8e51e93e335a1685a286e2c57b19101ff62fc78";user_id|i:1;username|s:5:"admin";full_name|s:13:"Administrator";role|s:5:"admin";user|a:4:{s:2:"id";i:1;s:8:"username";s:5:"admin";s:9:"full_name";s:13:"Administrator";s:4:"role";s:5:"admin";}

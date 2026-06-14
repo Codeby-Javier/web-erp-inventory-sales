@@ -10,12 +10,8 @@ final class AuthHandler extends Controller
             $this->redirect('');
         }
 
-        $this->render('auth/login', [
-            'flash' => $this->flash(),
-            'csrfField' => Csrf::field(),
-            'errors' => Helper::pullErrors(),
-            'old' => Helper::pullOld(),
-        ]);
+        header('Location: http://localhost:3000/login');
+        exit;
     }
 
     public function login(): void
