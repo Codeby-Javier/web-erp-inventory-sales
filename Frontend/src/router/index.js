@@ -4,6 +4,13 @@ import Login from '../views/Login.vue'
 
 import Product from '../views/Product.vue'
 import Stock from '../views/Stock.vue'
+import Purchase from '../views/Purchase.vue'
+import Sales from '../views/Sales.vue'
+import Category from '../views/Category.vue'
+import Unit from '../views/Unit.vue'
+import Location from '../views/Location.vue'
+import Supplier from '../views/Supplier.vue'
+import Customer from '../views/Customer.vue'
 
 const routes = [
   {
@@ -22,6 +29,48 @@ const routes = [
     path: '/stock',
     name: 'Stock',
     component: Stock,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/purchase',
+    name: 'Purchase',
+    component: Purchase,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    component: Sales,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: Category,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/unit',
+    name: 'Unit',
+    component: Unit,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/location',
+    name: 'Location',
+    component: Location,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/supplier',
+    name: 'Supplier',
+    component: Supplier,
+    meta: { requiresAuth: true }
+  },
+  {
+    path: '/customer',
+    name: 'Customer',
+    component: Customer,
     meta: { requiresAuth: true }
   },
   {

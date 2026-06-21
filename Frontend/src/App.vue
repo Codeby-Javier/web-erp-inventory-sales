@@ -15,7 +15,7 @@
   <div v-else class="page">
     <!-- Navbar -->
     <header class="navbar navbar-expand-md d-print-none" >
-      <div class="container-xl">
+      <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu" aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -54,7 +54,7 @@
     <header class="navbar-expand-md">
       <div class="collapse navbar-collapse" id="navbar-menu">
         <div class="navbar">
-          <div class="container-xl">
+          <div class="container-fluid">
             <ul class="navbar-nav">
               <li class="nav-item" :class="{ active: $route.path === '/' }">
                 <router-link class="nav-link" to="/">
@@ -104,7 +104,7 @@
       <router-view />
       
       <footer class="footer footer-transparent d-print-none">
-        <div class="container-xl">
+        <div class="container-fluid">
           <div class="row text-center align-items-center flex-row-reverse">
             <div class="col-12 col-lg-auto mt-3 mt-lg-0">
               <ul class="list-inline list-inline-dots mb-0">
@@ -117,6 +117,26 @@
         </div>
       </footer>
     </div>
+
+    <!-- Premium Coming Soon Modal -->
+    <div v-if="showModal" class="modal-backdrop fade show" style="z-index: 1040;"></div>
+    <div v-if="showModal" class="modal fade show d-block" tabindex="-1" style="z-index: 1050; display: block;" @click.self="showModal = false">
+      <div class="modal-dialog modal-sm modal-dialog-centered">
+        <div class="modal-content text-center py-4 border-0 shadow-lg" style="border-radius: 16px;">
+          <div class="modal-body">
+            <div class="mb-3">
+              <div class="avatar avatar-md bg-primary-lt rounded-circle">
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon text-primary" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" /><path d="M12 8l0 4" /><path d="M12 16l.01 0" /></svg>
+              </div>
+            </div>
+            <h3 class="mb-2 fw-bold text-dark">Pemberitahuan</h3>
+            <p class="text-muted mb-4 px-2">{{ modalMessage }}</p>
+            <button type="button" class="btn btn-primary w-100" @click="showModal = false">Tutup</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -129,6 +149,10 @@ const router = useRouter()
 const loading = ref(true)
 const isAuthenticated = ref(false)
 const user = ref(null)
+
+// Modal State
+const showModal = ref(false)
+const modalMessage = ref('')
 
 const userInitial = computed(() => {
   if (!user.value) return 'U'
@@ -181,6 +205,12 @@ window.addEventListener('api:unauthorized', () => {
 
 onMounted(() => {
   checkAuth()
+  
+  // Override browser alert with beautiful modal
+  window.alert = (msg) => {
+    modalMessage.value = msg || ''
+    showModal.value = true
+  }
 })
 </script>
 

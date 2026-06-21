@@ -5,15 +5,27 @@ declare(strict_types=1);
 return [
     ['OPTIONS', '/api/{any}', 'ApiHandler@options'],
     ['OPTIONS', '/api/{group}/{any}', 'ApiHandler@options'],
+    ['OPTIONS', '/api/{group}/{subgroup}/{any}', 'ApiHandler@options'],
     ['GET', '/api/me', 'ApiHandler@me'],
     ['POST', '/api/login', 'ApiHandler@login'],
     ['POST', '/api/logout', 'ApiHandler@logout'],
     ['GET', '/api/dashboard', 'ApiHandler@dashboard'],
     ['GET', '/api/products', 'ApiHandler@products'],
     ['GET', '/api/stock', 'ApiHandler@stock'],
+    ['POST', '/api/stock/adjust', 'ApiHandler@stockAdjust'],
     ['GET', '/api/sales', 'ApiHandler@sales'],
+    ['POST', '/api/sales', 'ApiHandler@createSales'],
+    ['POST', '/api/sales/{id}/cancel', 'ApiHandler@cancelSales'],
+    ['POST', '/api/sales/{id}/pay', 'ApiHandler@paySales'],
     ['GET', '/api/purchases', 'ApiHandler@purchases'],
+    ['POST', '/api/purchases', 'ApiHandler@createPurchase'],
+    ['POST', '/api/purchases/{id}/receive', 'ApiHandler@receivePurchase'],
     ['GET', '/api/master', 'ApiHandler@master'],
+    
+    // Generic CRUD API
+    ['POST', '/api/crud/{table}', 'ApiHandler@crudInsert'],
+    ['PUT', '/api/crud/{table}/{id}', 'ApiHandler@crudUpdate'],
+    ['DELETE', '/api/crud/{table}/{id}', 'ApiHandler@crudDelete'],
 
     ['GET', '/', 'DashboardHandler@index'],
     ['GET', '/dashboard', 'DashboardHandler@index'],

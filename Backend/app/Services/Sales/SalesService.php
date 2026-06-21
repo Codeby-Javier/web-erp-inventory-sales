@@ -34,8 +34,8 @@ final class SalesService
             if (($customerId === null || $customerId <= 0) && $customerName === '') {
                 throw new RuntimeException('Pilih customer atau isi nama customer walk in.');
             }
-            if ($customerId !== null && $customerId > 0 && $this->db->fetchOne('SELECT id FROM customers WHERE id = ? AND is_active = 1 LIMIT 1', [$customerId]) === null) {
-                throw new RuntimeException('Customer tidak valid.');
+            if ($customerId !== null && $customerId > 0 && $this->db->fetchOne("SELECT id FROM customers WHERE id = ? AND status = 'Aktif' LIMIT 1", [$customerId]) === null) {
+                throw new RuntimeException('Customer tidak valid atau tidak aktif.');
             }
             if (!in_array($paymentMethod, ['cash', 'transfer', 'credit'], true)) {
                 throw new RuntimeException('Metode pembayaran tidak valid.');
@@ -57,7 +57,7 @@ final class SalesService
                 $unitPrice = (float) ($item['unit_price'] ?? 0);
                 $lineDiscount = (float) ($item['discount'] ?? 0);
 
-                if ($productId <= 0 || $this->db->fetchOne('SELECT id FROM products WHERE id = ? AND is_active = 1 LIMIT 1', [$productId]) === null) {
+                if ($productId <= 0 || $this->db->fetchOne("SELECT id FROM products WHERE id = ? AND status = 'Aktif' LIMIT 1", [$productId]) === null) {
                     $errors[] = 'Produk pada item sales order tidak valid';
                     continue;
                 }
@@ -207,7 +207,7 @@ final class SalesService
             }
 
             $items = $this->db->fetchAll('SELECT * FROM sales_order_items WHERE so_id = ?', [$soId]);
-            $defaultLocation = (int) ($this->db->fetchOne('SELECT id FROM locations WHERE is_active = 1 ORDER BY id ASC LIMIT 1')['id'] ?? 0);
+            $defaultLocation = (int) ($this->db->fetchOne("SELECT id FROM locations WHERE status = 'Aktif' ORDER BY id ASC LIMIT 1")['id'] ?? 0);
             if ($defaultLocation <= 0) {
                 throw new RuntimeException('Lokasi default tidak ditemukan.');
             }
