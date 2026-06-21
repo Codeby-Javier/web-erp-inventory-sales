@@ -1,0 +1,11 @@
+name: web-erp
+type: php
+docroot: Backend
+php_version: "8.2"
+webserver_type: nginx-fpm
+database:
+  type: mariadb
+  version: "10.4"
+hooks:
+  post-start:
+    - exec: "echo 'DDEV is ready. Import your database manually or place a dump in .ddev/db-build/'"

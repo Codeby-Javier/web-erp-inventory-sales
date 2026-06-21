@@ -27,10 +27,10 @@ final class PurchaseService
             $supplierId = isset($data['supplier_id']) && $data['supplier_id'] !== null ? (int) $data['supplier_id'] : null;
             $locationId = (int) ($data['location_id'] ?? 0);
 
-            if ($supplierId !== null && $supplierId > 0 && $this->db->fetchOne('SELECT id FROM suppliers WHERE id = ? AND is_active = 1 LIMIT 1', [$supplierId]) === null) {
+            if ($supplierId !== null && $supplierId > 0 && $this->db->fetchOne("SELECT id FROM suppliers WHERE id = ? AND status = 'Aktif' LIMIT 1", [$supplierId]) === null) {
                 throw new RuntimeException('Supplier tidak valid.');
             }
-            if ($locationId <= 0 || $this->db->fetchOne('SELECT id FROM locations WHERE id = ? AND is_active = 1 LIMIT 1', [$locationId]) === null) {
+            if ($locationId <= 0 || $this->db->fetchOne("SELECT id FROM locations WHERE id = ? AND status = 'Aktif' LIMIT 1", [$locationId]) === null) {
                 throw new RuntimeException('Lokasi tidak valid.');
             }
 
@@ -41,7 +41,7 @@ final class PurchaseService
                 $quantity = (float) ($item['quantity'] ?? 0);
                 $unitPrice = (float) ($item['unit_price'] ?? 0);
 
-                if ($productId <= 0 || $this->db->fetchOne('SELECT id FROM products WHERE id = ? AND is_active = 1 LIMIT 1', [$productId]) === null) {
+                if ($productId <= 0 || $this->db->fetchOne("SELECT id FROM products WHERE id = ? AND status = 'Aktif' LIMIT 1", [$productId]) === null) {
                     throw new RuntimeException('Produk purchase order tidak valid.');
                 }
                 if ($quantity <= 0) {
